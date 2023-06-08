@@ -28,5 +28,18 @@ class ClassTest:
 
 # example of class variable in use
 class Book:
-        TYPE= ('hardcover', 'softcover')
+    TYPES = ('hardcover', 'softcover')
 
+    def __init__(self, name, book_type, weight):
+        self.name = name
+        self.book_type = book_type
+        self.weight = weight
+
+    def __repr__(self):
+        return f"Book: {self.name}, {self.book_type}, weight: {self.weight}"
+
+# print(Book.TYPES)
+
+potter = Book("Harry Potter", "harcover", 1500)
+
+print(potter)
