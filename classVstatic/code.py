@@ -37,9 +37,12 @@ class Book:
 
     def __repr__(self):
         return f"Book: {self.name}, {self.book_type}, weight: {self.weight}"
+    
+    # create a method that will create a new book using the types class variable
+    
 
 # print(Book.TYPES)
 
 potter = Book("Harry Potter", "harcover", 1500)
 
-print(potter)
+# print(potter)
