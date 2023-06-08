@@ -12,7 +12,7 @@ class ClassTest:
         print("calling static method")
 
 # declare the class
-test = ClassTest()
+# test = ClassTest()
 # call the method on the instance
 # test.instance_method()
 # call the method on the class, passing in the instance
@@ -20,7 +20,13 @@ test = ClassTest()
 
 
 # testing the class method
-ClassTest.class_method()
+# ClassTest.class_method()
 
 # testing the static method
-ClassTest.static_method()
+# ClassTest.static_method()
+
+
+# example of class variable in use
+class Book:
+        TYPE= ('hardcover', 'softcover')
+
