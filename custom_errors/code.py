@@ -25,5 +25,10 @@ potter = Book("Harry", 50)
 # potter.read(50)
 
 # updated with a try except to catch our new error
+try:
+    potter.read(50)
+    potter.read(50)
+except TooManyPagesReadError as e:
+    print(e)
 
 
