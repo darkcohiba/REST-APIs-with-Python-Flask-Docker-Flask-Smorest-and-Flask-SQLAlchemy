@@ -9,17 +9,26 @@ def list_avg(sequence : list) -> float:
 # print(list_avg([1,2,3]))
 
 # with our class example:
-class Bookshelf:
-    def __init__(self, *books):
-        self.books = books
-
-    def __str__(self):
-        return f"Bookshelf with {len(self.books)} books"
-    
+# import list from types
+from typing import List
 
 class Book:
     def __init__(self, name):
         self.name = name
 
-    def __str__(self):
+    def __str__(self) -> str:
         return f"Book title: {self.name}"
+    
+class Bookshelf:
+    def __init__(self, *books:List[Book]):
+        self.books = books
+
+    def __str__(self) -> str:
+        return f"Bookshelf with {len(self.books)} books"
+    
+potter = Book("Harry Potter")
+python = Book("Python 101")
+
+wood = Bookshelf(potter, python)
+print(potter)
+print(wood)
