@@ -18,6 +18,10 @@ def get_stores():
     # updated for the db.py
     return {"stores": list(stores.values())}
 
+@app.get("/item")
+def get_all_items():
+    return {"items": list(items.values())}
+
 #  create a new store
 # first version
 # @app.post("/store")
@@ -80,14 +84,6 @@ def create_item():
 #             return store
 #     return {"message":"store not found"}, 404
 
-# foute to return the stores items by the store name
-# @app.get("/store/<string:name>/items")
-# def get_item_in_store(name):
-#     for store in stores:
-#         if store["name"] == name.title():
-#             return {"items": store["items"]}
-#     return {"message":"store not found"}, 404
-
 # new version working with the id system using the db.py
 #  returns the store based on url parameters
 @app.get("/store/<int:store_id>")
@@ -96,5 +92,14 @@ def get_store(store_id):
         return stores[store_id], 200
     except KeyError:
         return {"message":"store not found"}, 404
+    
+
+# new route to return the stores items by the store name
+@app.get("/items/<string:item_id>")
+def get_item_in_store(name):
+    for store in stores:
+        if store["name"] == name.title():
+            return {"items": store["items"]}
+    return {"message":"store not found"}, 404
 
 
