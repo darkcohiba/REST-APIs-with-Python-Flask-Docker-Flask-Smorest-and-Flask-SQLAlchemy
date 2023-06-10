@@ -1,11 +1,17 @@
 from flask import Flask, request
 
+# importing our two dicts from our db.py
 from db import items, stores
+
+# next refactor is adding flask smorest to do our error handling
+from flask_smorest import abort
+
+
 import uuid
 
 app = Flask(__name__)
 
-# storing our data in a list
+# storing our data in a list then we changed to storing our data in a dictionary
 
 
 
@@ -16,11 +22,11 @@ def get_stores():
     # return {"stores": stores}
     print(stores)
     # updated for the db.py
-    return {"stores": list(stores.values())}
+    return {"stores": list(stores.values())}, 200
 
 @app.get("/item")
 def get_all_items():
-    return {"items": list(items.values())}
+    return {"items": list(items.values())}, 200
 
 #  create a new store
 # first version
@@ -91,15 +97,18 @@ def get_store(store_id):
     try:
         return stores[store_id], 200
     except KeyError:
+        # without smorest
         return {"message":"store not found"}, 404
+        # with smorest
+        abort(404, message="store not found")
     
 
-# new route to return the stores items by the store name
+# new route to return the item by the id
 @app.get("/items/<string:item_id>")
 def get_item_in_store(item_id):
     try:
         return items[item_id], 200
     except KeyError:
-        return {"message":"store not found"}, 404
+        return {"message":"item not found"}, 404
 
 
