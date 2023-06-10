@@ -38,5 +38,19 @@ def create_item(name):
                 "price": request_data["price"]
             }
             store["items"].append(new_item)
-            return {"stores": stores}
-    return {"message":"store not found"}
+            return {"stores": stores}, 201
+    return {"message":"store not found"}, 404
+
+@app.get("/store/<string:name>")
+def get_store(name):
+    for store in stores:
+        if store["name"] == name.title():
+            return store
+    return {"message":"store not found"}, 404
+
+@app.get("/store/<string:name>/items")
+def get_store(name):
+    for store in stores:
+        if store["name"] == name.title():
+            return {"items": store["items"]}
+    return {"message":"store not found"}, 404
