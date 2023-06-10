@@ -20,7 +20,7 @@ class Book:
         print(f"Read {self.pages_read} out of {self.page_count}.")
 
 potter = Book("Harry", 50)
-# potter.read(50)
+# potter.read(50)a
 # to start if we run this second read 50 we have an output of "Read 100 out of 50.", which isn't possible so goal is to add our custom error to catch this.
 # potter.read(50)
 
