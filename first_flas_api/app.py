@@ -1,6 +1,7 @@
 from flask import Flask, request
 
 from db import items, stores
+import uuid
 
 app = Flask(__name__)
 
@@ -17,11 +18,24 @@ def get_stores():
     return {"stores": list(stores.values())}
 
 #  create a new store
+# first version
+# @app.post("/store")
+# def post_store():
+#     request_data = request.get_json()
+#     stores.append(request_data)
+#     return {"stores": stores}, 201
+
+# new version with db.py
 @app.post("/store")
 def post_store():
-    request_data = request.get_json()
-    stores.append(request_data)
-    return {"stores": stores}, 201
+    store_data = request.get_json()
+    store_id = uuid.uuid4().hex
+    new_store = {
+        **store_data,
+        "id": store_id
+    }
+    stores[store_id]= new_store
+    return new_store, 201
 
 # will post items to the store provided in the url
 @app.post("/store/<string:name>/item")
