@@ -16,16 +16,19 @@ stores=[
     }
 ]
 
+# get all stores
 @app.get("/store")
 def get_stores():
     return {"stores": stores}
 
+#  create a new store
 @app.post("/store")
 def post_store():
     request_data = request.get_json()
     stores.append(request_data)
     return {"stores": stores}, 201
 
+# will post items to the store provided in the url
 @app.post("/store/<string:name>/item")
 def create_item(name):
     request_data = request.get_json()
@@ -41,6 +44,7 @@ def create_item(name):
             return {"stores": stores}, 201
     return {"message":"store not found"}, 404
 
+#  returns the store based on url parameters
 @app.get("/store/<string:name>")
 def get_store(name):
     for store in stores:
@@ -48,6 +52,7 @@ def get_store(name):
             return store
     return {"message":"store not found"}, 404
 
+# foute to return the stores items by the store name
 @app.get("/store/<string:name>/items")
 def get_item_in_store(name):
     for store in stores:
