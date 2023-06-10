@@ -38,4 +38,5 @@ def create_item(name):
                 "price": request_data["price"]
             }
             store["items"].append(new_item)
-    return {"stores": stores}
+            return {"stores": stores}
+    return {"message":"store not found"}
