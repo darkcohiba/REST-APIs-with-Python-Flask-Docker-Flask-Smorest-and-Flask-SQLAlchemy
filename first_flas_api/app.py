@@ -96,10 +96,10 @@ def get_store(store_id):
 
 # new route to return the stores items by the store name
 @app.get("/items/<string:item_id>")
-def get_item_in_store(name):
-    for store in stores:
-        if store["name"] == name.title():
-            return {"items": store["items"]}
-    return {"message":"store not found"}, 404
+def get_item_in_store(item_id):
+    try:
+        return items[item_id], 200
+    except KeyError:
+        return {"message":"store not found"}, 404
 
 
