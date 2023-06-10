@@ -1,4 +1,8 @@
-stores={}
+stores={
+    1:{
+        "name": "Marzyck"
+    }
+}
 items={}
 
 # stores=[
