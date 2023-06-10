@@ -1,20 +1,12 @@
 from flask import Flask, request
 
+from db import items, stores
+
 app = Flask(__name__)
 
 # storing our data in a list
 
-stores=[
-    {
-        "name":"Marzyck",
-        "items":[
-            {
-                "name":"Chicken",
-                "price": 12.99
-            }
-        ]
-    }
-]
+
 
 # get all stores
 @app.get("/store")
@@ -59,3 +51,4 @@ def get_item_in_store(name):
         if store["name"] == name.title():
             return {"items": store["items"]}
     return {"message":"store not found"}, 404
+
