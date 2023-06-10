@@ -1,6 +1,7 @@
 stores={
     1:{
-        "name": "Marzyck"
+        "name": "Marzyck",
+        "id": "1"
     }
 }
 items={}

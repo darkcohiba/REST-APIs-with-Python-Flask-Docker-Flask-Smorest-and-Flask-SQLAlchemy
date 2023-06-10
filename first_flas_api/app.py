@@ -14,6 +14,7 @@ app = Flask(__name__)
 def get_stores():
     # original with the database as the list stored in this file:
     # return {"stores": stores}
+    print(stores)
     # updated for the db.py
     return {"stores": list(stores.values())}
 
@@ -38,20 +39,37 @@ def post_store():
     return new_store, 201
 
 # will post items to the store provided in the url
-@app.post("/store/<string:name>/item")
-def create_item(name):
-    request_data = request.get_json()
-    # print(request_data)
-    for store in stores:
-        print(store["name"])
-        if store["name"] == name.title():
-            new_item = {
-                "name": request_data["name"],
-                "price": request_data["price"]
-            }
-            store["items"].append(new_item)
-            return {"stores": stores}, 201
-    return {"message":"store not found"}, 404
+# @app.post("/store/<string:name>/item")
+# def create_item(name):
+#     request_data = request.get_json()
+#     # print(request_data)
+#     for store in stores:
+#         print(store["name"])
+#         if store["name"] == name.title():
+#             new_item = {
+#                 "name": request_data["name"],
+#                 "price": request_data["price"]
+#             }
+#             store["items"].append(new_item)
+#             return {"stores": stores}, 201
+#     return {"message":"store not found"}, 404
+
+# updated create item with db.py
+@app.post("/item")
+def create_item():
+    item_data = request.get_json()
+    try:
+        if item_data["store_id"] not in stores:
+            return {"message": "store not found"}, 404
+    except KeyError:
+        return {"message": "store not found"}, 404
+    item_id = uuid.uuid4().hex
+    new_item = {
+        **item_data,
+        "id": item_id
+    }
+    items[item_id]= new_item
+    return new_item, 201
 
 # original based on store name
 #  returns the store based on url parameters
