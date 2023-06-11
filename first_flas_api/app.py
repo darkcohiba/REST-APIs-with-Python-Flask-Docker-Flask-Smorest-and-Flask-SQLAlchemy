@@ -6,7 +6,7 @@ from db import items, stores
 # next refactor is adding flask smorest to do our error handling
 from flask_smorest import abort
 
-
+# using this for our ids for our db.py database
 import uuid
 
 app = Flask(__name__)
