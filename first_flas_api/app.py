@@ -49,7 +49,8 @@ def post_store():
         )
     # make sure our store doesn't already exist
     for store in stores.values():
-        pass
+        if store_data["name"] == store["name"]:
+            abort(400, message="Store already exists")
     store_id = uuid.uuid4().hex
     new_store = {
         **store_data,
@@ -78,13 +79,26 @@ def post_store():
 @app.post("/item")
 def create_item():
     item_data = request.get_json()
-    try:
-        if item_data["store_id"] not in stores:
-            return {"message": "store not found"}, 404
-    except KeyError:
-        # return {"message": "store not found"}, 404
-        # with smorest
-        abort(404, message="store not found.")
+    # my error catching
+    # try:
+    #     if item_data["store_id"] not in stores:
+    #         return {"message": "store not found"}, 404
+    # except KeyError:
+    #     # return {"message": "store not found"}, 404
+    #     # with smorest
+    #     abort(404, message="store not found.")
+    # course error catching
+    # checking to see if each expected attribute is in the data recieved
+    if (
+        "price" not in item_data
+        or "store_id" not in item_data
+        or "name" not in item_data
+    ):
+        abort(400, message="Bad request, ensure price, name and store_id are")
+
+    # check to see if the store from the item exists, if not abort
+    if item_data["store_id"] not in stores:
+        abort(404, message="Store not found.")
     item_id = uuid.uuid4().hex
     new_item = {
         **item_data,
