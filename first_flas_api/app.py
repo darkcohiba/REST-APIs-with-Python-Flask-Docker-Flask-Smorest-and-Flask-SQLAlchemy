@@ -40,6 +40,16 @@ def get_all_items():
 @app.post("/store")
 def post_store():
     store_data = request.get_json()
+
+    # make sure our json data sent through the name
+    if "name" not in store_data:
+        abort(
+            400,
+            message="Bad request. Ensure 'name' is included in the JSON payload.",
+        )
+    # make sure our store doesn't already exist
+    for store in stores.values():
+        pass
     store_id = uuid.uuid4().hex
     new_store = {
         **store_data,
