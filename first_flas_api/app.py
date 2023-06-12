@@ -74,7 +74,7 @@ def create_item():
     except KeyError:
         # return {"message": "store not found"}, 404
         # with smorest
-        abort(404, message="store not found")
+        abort(404, message="store not found.")
     item_id = uuid.uuid4().hex
     new_item = {
         **item_data,
@@ -102,7 +102,7 @@ def get_store(store_id):
         # without smorest
         # return {"message":"store not found"}, 404
         # with smorest
-        abort(404, message="store not found")
+        abort(404, message="store not found.")
     
 
 # new route to return the item by the id
@@ -113,6 +113,6 @@ def get_item_in_store(item_id):
     except KeyError:
         # return {"message":"item not found"}, 404
         # with smorest
-        abort(404, message="item not found")
+        abort(404, message="item not found.")
 
 
