@@ -122,6 +122,14 @@ def delete_item(item_id):
     except KeyError:
         abort(404, "Item not found")
 
+@app.delete("/store/<int:store_id>")
+def delete_store(store_id):
+    try:
+        del stores[store_id]
+        return {"message": "Store deleted."}
+    except KeyError:
+        abort(404, "Store not found")
+
 # original based on store name
 #  returns the store based on url parameters
 # @app.get("/store/<string:name>")
