@@ -114,7 +114,7 @@ def create_item():
     return new_item, 201
 
 # delete item
-@app.delete("/item/<int:item_id>")
+@app.delete("/item/<string:item_id>")
 def delete_item(item_id):
     try:
         del items[item_id]
