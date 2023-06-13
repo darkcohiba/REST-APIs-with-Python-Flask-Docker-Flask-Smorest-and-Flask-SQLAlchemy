@@ -4,8 +4,20 @@ FROM python:3.11
 EXPOSE 5000
 # set our work directory
 WORKDIR /app
+
 # install dependencies
 RUN pip install flask
+RUN pip install flask-smorest
+# above code works
+# RUN pip install python-dotenv
+
+# updated to install our dependencies from pipfile
+# Install & use pipenv
+# COPY Pipfile Pipfile.lock ./
+# RUN python3 -m pip install --upgrade pip
+# RUN pip install pipenv && pipenv install --dev --system --deploy
+# above code doesn't work
+
 # we want to copy our entire folder and put it into the same folder, styled source to destination
 COPY . .
 # last tell it the commands to run

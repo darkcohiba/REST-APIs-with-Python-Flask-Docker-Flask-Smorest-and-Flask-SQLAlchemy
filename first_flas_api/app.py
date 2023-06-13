@@ -24,9 +24,7 @@ def get_stores():
     # updated for the db.py
     return {"stores": list(stores.values())}, 200
 
-@app.get("/item")
-def get_all_items():
-    return {"items": list(items.values())}, 200
+
 
 #  create a new store
 # first version
@@ -59,6 +57,16 @@ def post_store():
     stores[store_id]= new_store
     return new_store, 201
 
+# delete store
+@app.delete("/store/<int:store_id>")
+def delete_store(store_id):
+    try:
+        del stores[store_id]
+        return {"message": "Store deleted."}
+    except KeyError:
+        abort(404, "Store not found")
+
+    
 # will post items to the store provided in the url
 # @app.post("/store/<string:name>/item")
 # def create_item(name):
@@ -74,6 +82,11 @@ def post_store():
 #             store["items"].append(new_item)
 #             return {"stores": stores}, 201
 #     return {"message":"store not found"}, 404
+
+@app.get("/item")
+def get_all_items():
+    return {"items": list(items.values())}, 200
+
 
 # updated create item with db.py
 @app.post("/item")
@@ -122,14 +135,7 @@ def delete_item(item_id):
     except KeyError:
         abort(404, "Item not found")
 
-# delete store
-@app.delete("/store/<int:store_id>")
-def delete_store(store_id):
-    try:
-        del stores[store_id]
-        return {"message": "Store deleted."}
-    except KeyError:
-        abort(404, "Store not found")
+
 
 
 
