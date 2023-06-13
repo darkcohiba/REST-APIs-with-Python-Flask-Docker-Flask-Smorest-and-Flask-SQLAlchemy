@@ -95,7 +95,13 @@ def create_item():
         or "name" not in item_data
     ):
         abort(400, message="Bad request, ensure price, name and store_id are")
-
+    # check to see if the item already exists in our system under the same store
+    for item in items.values():
+        if (
+            item_data["name"] == item["name"]
+            and item_data["store_id"] == item["store_id"]
+        ):
+            abort(404, "Item already exists.")
     # check to see if the store from the item exists, if not abort
     if item_data["store_id"] not in stores:
         abort(404, message="Store not found.")
