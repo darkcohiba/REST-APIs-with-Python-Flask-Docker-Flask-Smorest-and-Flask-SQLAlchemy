@@ -122,6 +122,7 @@ def delete_item(item_id):
     except KeyError:
         abort(404, "Item not found")
 
+# delete store
 @app.delete("/store/<int:store_id>")
 def delete_store(store_id):
     try:
@@ -129,6 +130,8 @@ def delete_store(store_id):
         return {"message": "Store deleted."}
     except KeyError:
         abort(404, "Store not found")
+
+
 
 # original based on store name
 #  returns the store based on url parameters
@@ -141,6 +144,8 @@ def delete_store(store_id):
 
 # new version working with the id system using the db.py
 #  returns the store based on url parameters
+
+
 @app.get("/store/<int:store_id>")
 def get_store(store_id):
     try:
@@ -160,6 +165,22 @@ def get_item_in_store(item_id):
     except KeyError:
         # return {"message":"item not found"}, 404
         # with smorest
+        abort(404, message="item not found.")
+
+
+# update item
+@app.put("/items/<string:item_id>")
+def update_item(item_id):
+    item_data = request.get_json()
+    if "price" not in item_data or "name" not in item_data:
+        abort(400, message="Bad request. Ensure 'price' and 'name' are included in the JSON payload.")
+
+    try:
+        item = items[item_id]
+        item |= item_data
+
+        return item
+    except KeyError:
         abort(404, message="item not found.")
 
 
