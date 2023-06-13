@@ -113,6 +113,15 @@ def create_item():
     items[item_id]= new_item
     return new_item, 201
 
+# delete item
+@app.delete("/item/<int:item_id>")
+def delete_item(item_id):
+    try:
+        del items[item_id]
+        return {"message": "Item deleted."}
+    except KeyError:
+        abort(404, "Item not found")
+
 # original based on store name
 #  returns the store based on url parameters
 # @app.get("/store/<string:name>")
