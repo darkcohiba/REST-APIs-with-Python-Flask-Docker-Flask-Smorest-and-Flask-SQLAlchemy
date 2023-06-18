@@ -42,3 +42,10 @@ CMD [ "flask","run", "--host", "0.0.0.0" ]
 # to run image in the terminal but in the background allowing the terminal to be used
 # $docker run -dp 5005:5000 rest-apis-flask-python-first
 # the added d is daemon to run it in the background, you will see it in your container section on docker desktop.
+
+
+# to run image in the terminal and also put it into debug mode with refreshing.
+# $docker run -dp 5005:5000 -w /app -v "$(pwd):/app" rest-apis-flask-python-first
+
+
+# docker build -t "rest-apis-flask-python-first" .
