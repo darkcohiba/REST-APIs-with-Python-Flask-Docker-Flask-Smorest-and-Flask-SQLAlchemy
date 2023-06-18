@@ -18,6 +18,11 @@ RUN pip install flask-smorest
 # RUN pip install pipenv && pipenv install --dev --system --deploy
 # above code doesn't work
 
+# if we have a requirements file we can install it like so:
+# COPY requirements.txt .
+# RUN pip install -r requirements.txt
+
+
 # we want to copy our entire folder and put it into the same folder, styled source to destination
 COPY . .
 # last tell it the commands to run
