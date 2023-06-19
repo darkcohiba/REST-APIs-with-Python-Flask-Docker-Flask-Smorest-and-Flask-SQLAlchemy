@@ -12,3 +12,6 @@ blp = Blueprint("stores", __name__, description="Operation on stores")
 class Store(MethodView):
     def get(self):
         pass
+
+    def delete(self):
+        pass
