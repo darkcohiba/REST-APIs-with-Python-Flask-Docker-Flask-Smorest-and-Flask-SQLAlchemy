@@ -45,6 +45,7 @@ def post_store():
             400,
             message="Bad request. Ensure 'name' is included in the JSON payload.",
         )
+    print("hello")
     # make sure our store doesn't already exist
     for store in stores.values():
         if store_data["name"] == store["name"]:
