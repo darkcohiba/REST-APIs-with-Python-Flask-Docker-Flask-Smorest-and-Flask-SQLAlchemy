@@ -9,3 +9,6 @@ from db import stores
 blp = Blueprint("stores", __name__, description="Operation on stores")
 
 # create a class out of method views
+class Store(MethodView):
+    def get(self):
+        pass
