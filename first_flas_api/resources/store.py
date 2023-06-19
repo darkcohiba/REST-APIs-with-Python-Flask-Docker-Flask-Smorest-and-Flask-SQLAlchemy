@@ -13,7 +13,13 @@ blp = Blueprint("stores", __name__, description="Operation on stores")
 @blp.route("/store/<string:store_id>")
 class Store(MethodView):
     def get(self, store_id):
-        pass
+        try:
+            return stores[store_id], 200
+        except KeyError:
+            # without smorest
+            # return {"message":"store not found"}, 404
+            # with smorest
+            abort(404, message="store not found.")
 
     def delete(self, store_id):
         try:
