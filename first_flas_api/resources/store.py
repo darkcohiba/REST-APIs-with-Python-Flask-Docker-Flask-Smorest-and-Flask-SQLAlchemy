@@ -9,9 +9,11 @@ from db import stores
 blp = Blueprint("stores", __name__, description="Operation on stores")
 
 # create a class out of method views
+# establish the route with the blueprint
+@blp.route("/store/<string:store_id>")
 class Store(MethodView):
-    def get(self):
+    def get(self, store_id):
         pass
 
-    def delete(self):
-        pass
+    def delete(self, store_id):
+        
