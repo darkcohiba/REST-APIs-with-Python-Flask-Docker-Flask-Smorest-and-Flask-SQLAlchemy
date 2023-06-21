@@ -11,10 +11,10 @@ blp = Blueprint("stores", __name__, description="Operation on stores")
 # create a class out of method views
 # establish the route with the blueprint
 @blp.route("/store/<string:item_id>")
-class Store(MethodView):
-    def get(self, store_id):
+class Item(MethodView):
+    def get(self, item_id):
         try:
-            return stores[store_id], 200
+            return stores[item_id], 200
         except KeyError:
             # without smorest
             # return {"message":"store not found"}, 404
