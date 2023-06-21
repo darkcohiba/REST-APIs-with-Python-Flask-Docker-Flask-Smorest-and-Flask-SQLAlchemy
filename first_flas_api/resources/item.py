@@ -2,28 +2,28 @@ import uuid
 from flask import request
 from flask.views import MethodView
 from flask_florest import Blueprint, abort
-from db import stores
+from db import items
 
 
 # create blueprint
-blp = Blueprint("stores", __name__, description="Operation on stores")
+blp = Blueprint("items", __name__, description="Operation on items")
 
 # create a class out of method views
 # establish the route with the blueprint
-@blp.route("/store/<string:item_id>")
+@blp.route("/item/<string:item_id>")
 class Item(MethodView):
     def get(self, item_id):
         try:
-            return stores[item_id], 200
+            return items[item_id], 200
         except KeyError:
             # without smorest
             # return {"message":"store not found"}, 404
             # with smorest
-            abort(404, message="store not found.")
+            abort(404, message="Item not found.")
 
-    def delete(self, store_id):
+    def delete(self, item_id):
         try:
-            del stores[store_id]
-            return {"message": "Store deleted."}
+            del items[item_id]
+            return {"message": "Item deleted."}
         except KeyError:
-            abort(404, "Store not found")
+            abort(404, "Item not found")
