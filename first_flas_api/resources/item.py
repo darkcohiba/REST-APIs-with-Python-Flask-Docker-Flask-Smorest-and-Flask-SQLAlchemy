@@ -17,7 +17,7 @@ class Item(MethodView):
             return items[item_id], 200
         except KeyError:
             # without smorest
-            # return {"message":"store not found"}, 404
+            # return {"message":"item not found"}, 404
             # with smorest
             abort(404, message="Item not found.")
 
