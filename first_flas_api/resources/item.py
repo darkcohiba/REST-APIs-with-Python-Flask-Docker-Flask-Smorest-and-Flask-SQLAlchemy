@@ -27,3 +27,18 @@ class Item(MethodView):
             return {"message": "Item deleted."}
         except KeyError:
             abort(404, "Item not found")
+
+
+    @app.put("/items/<string:item_id>")
+    def update_item(item_id):
+        item_data = request.get_json()
+        if "price" not in item_data or "name" not in item_data:
+            abort(400, message="Bad request. Ensure 'price' and 'name' are included in the JSON payload.")
+
+        try:
+            item = items[item_id]
+            item |= item_data
+
+            return item
+        except KeyError:
+            abort(404, message="item not found.")
