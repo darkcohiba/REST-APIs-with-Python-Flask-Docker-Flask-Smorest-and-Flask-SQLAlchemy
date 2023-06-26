@@ -16,6 +16,8 @@ app = Flask(__name__)
 
 # blueprint set up:
 
+app.config
+
 
 
 # no longer needed because we are using blueprints
