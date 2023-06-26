@@ -8,9 +8,14 @@ from flask import Flask, request
 # using blueprints we dont need this
 # from flask_smorest import abort
 
+# import flask smorest from flask_smorest for blueprints
+from flask_smorest import Api
+
 # using this for our ids for our db.py database
 # using blueprints we dont need this
 # import uuid
+
+# import our blueprints
 
 app = Flask(__name__)
 
@@ -25,6 +30,10 @@ app.config["OPENAPI_SWAGGER_UI_PATH"] = "/swagger-ui"
 app.config["OPENAPI_SWAGGER_UI_URL"] = "https://cdn.jsdelivr.net/npm/swagger-ui-dist" 
 
 
+# create our api endpoints
+api = Api(app)
+api.register_blueprint(ItemBlueprint)
+api.register_blueprint(StoreBlueprint)
 
 
 
