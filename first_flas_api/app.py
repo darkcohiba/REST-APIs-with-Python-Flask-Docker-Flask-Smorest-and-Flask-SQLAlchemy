@@ -16,9 +16,11 @@ app = Flask(__name__)
 
 # blueprint set up:
 
-app.config
-
-
+app.config["PROPAGATE_EXCEPTIONS"] = True
+app.config["API_TITLE"] = "Stores Rest API"
+app.config["API_VERSION"] = "v1"
+app.config["OPENAPI_VERSION"] = "3.0.3"
+app.config["OPENAPI_URL_PREFIX"] ="/"
 
 # no longer needed because we are using blueprints
 # storing our data in a list then we changed to storing our data in a dictionary
