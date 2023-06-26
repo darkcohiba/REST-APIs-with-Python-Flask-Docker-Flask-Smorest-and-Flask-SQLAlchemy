@@ -21,6 +21,8 @@ app.config["API_TITLE"] = "Stores Rest API"
 app.config["API_VERSION"] = "v1"
 app.config["OPENAPI_VERSION"] = "3.0.3"
 app.config["OPENAPI_URL_PREFIX"] ="/"
+app.config["OPENAPI_SWAGGER_UI_PATH"] = "/swagger-ui"
+
 
 # no longer needed because we are using blueprints
 # storing our data in a list then we changed to storing our data in a dictionary
