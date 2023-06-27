@@ -1,7 +1,7 @@
 import uuid
 from flask import request
 from flask.views import MethodView
-from flask_florest import Blueprint, abort
+from flask_smorest import Blueprint, abort
 from db import items
 
 
@@ -28,8 +28,6 @@ class Item(MethodView):
         except KeyError:
             abort(404, "Item not found")
 
-
-    @app.put("/items/<string:item_id>")
     def update_item(item_id):
         item_data = request.get_json()
         if "price" not in item_data or "name" not in item_data:

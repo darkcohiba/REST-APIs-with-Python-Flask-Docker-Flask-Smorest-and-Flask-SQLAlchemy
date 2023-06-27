@@ -4,7 +4,11 @@ stores={
         "id": "1"
     }
 }
-items={}
+items={
+    1:{
+        
+    }
+}
 
 # stores=[
 #     {

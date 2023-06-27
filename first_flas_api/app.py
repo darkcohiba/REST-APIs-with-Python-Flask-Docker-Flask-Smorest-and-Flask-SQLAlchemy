@@ -16,6 +16,9 @@ from flask_smorest import Api
 # import uuid
 
 # import our blueprints
+from resources.item import blp as ItemBlueprint
+from resources.store import blp as StoreBlueprint
+
 
 app = Flask(__name__)
 
