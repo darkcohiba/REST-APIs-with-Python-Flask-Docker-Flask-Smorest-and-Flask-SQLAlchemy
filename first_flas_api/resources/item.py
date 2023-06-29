@@ -10,7 +10,7 @@ blp = Blueprint("items", __name__, description="Operation on items")
 
 # create a class out of method views
 # establish the route with the blueprint
-@blp.route("/item/<string:item_id>")
+@blp.route("/item/<int:item_id>")
 class Item(MethodView):
     def get(self, item_id):
         try:

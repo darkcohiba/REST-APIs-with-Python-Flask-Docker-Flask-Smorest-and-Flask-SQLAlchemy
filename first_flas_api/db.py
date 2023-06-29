@@ -6,7 +6,9 @@ stores={
 }
 items={
     1:{
-        
+        "name":"Pancake Batter",
+        "price": 1.50,
+        "store_id": 1
     }
 }
 
