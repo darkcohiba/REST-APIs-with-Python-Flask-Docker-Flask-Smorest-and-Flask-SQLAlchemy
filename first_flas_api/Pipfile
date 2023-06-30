@@ -7,6 +7,7 @@ name = "pypi"
 python-dotenv = "*"
 flask = "*"
 flask-smorest = "*"
+marshmallow = "*"
 
 [dev-packages]
 
