@@ -2,14 +2,11 @@ from marshmallow import Schema, fields
 
 
 class ItemSchema(Schema):
-    id = fields.Integer()
+    # id = fields.Integer()
     name = fields.String()
     price = fields.Float()
-    description = fields.String()
-    image = fields.String()
+    store_id = fields.Integer()
 
 class UpdateItemSchema(Schema):
     name = fields.String()
     price = fields.Float()
-    description = fields.String()
-    image = fields.String()
