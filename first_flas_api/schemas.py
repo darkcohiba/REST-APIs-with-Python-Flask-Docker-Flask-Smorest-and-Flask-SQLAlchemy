@@ -2,8 +2,8 @@ from marshmallow import Schema, fields
 
 
 class ItemSchema(Schema):
-    # id = fields.Integer()
-    name = fields.String()
+    id = fields.Str(dump_only=True)
+    name = fields.Str(required=True)
     price = fields.Float()
     store_id = fields.Integer()
 
