@@ -49,8 +49,9 @@ class ItemList(MethodView):
 
     # we can use the schema to validate the data, first we add it as a decorator, then we recieve it through the function
     @blp.arguments(ItemSchema)
-    def post(self):
-        item_data = request.get_json()
+    def post(self, item_data):
+        # we no longer need to request the data since it is going to be recieved through the decorator.
+        # item_data = request.get_json()
         # we no longer need to do this validation since we will use the schemas
         # Here not only we need to validate data exists,
         # But also what type of data. Price should be a float,
