@@ -55,15 +55,15 @@ class StoreList(MethodView):
         #         400,
         #         message="Bad request. Ensure 'price', 'store_id', and 'name' are included in the JSON payload.",
         #     )
-        for item in items.values():
+        for store in stores.values():
             if (
-                item_data["name"] == item["name"]
-                and item_data["store_id"] == item["store_id"]
+                store_data["name"] == store["name"]
+                and store_data["store_id"] == store["store_id"]
             ):
                 abort(400, message=f"Item already exists.")
 
-        item_id = uuid.uuid4().hex
-        item = {**item_data, "id": item_id}
-        items[item_id] = item
+        store_id = uuid.uuid4().hex
+        store = {**store_data, "id": store_id}
+        stores[store_id] = store
 
-        return item
+        return store
