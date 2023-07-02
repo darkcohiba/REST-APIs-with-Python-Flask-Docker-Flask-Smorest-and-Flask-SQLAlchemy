@@ -2,7 +2,7 @@ import uuid
 from flask import request
 from flask.views import MethodView
 from flask_smorest import Blueprint, abort
-from schemas import ItemSchema
+from schemas import ItemSchema, UpdateItemSchema
 from db import items
 
 
@@ -29,10 +29,14 @@ class Item(MethodView):
         except KeyError:
             abort(404, "Item not found")
 
-    def update_item(item_id):
-        item_data = request.get_json()
-        if "price" not in item_data or "name" not in item_data:
-            abort(400, message="Bad request. Ensure 'price' and 'name' are included in the JSON payload.")
+    @blp.arguments(UpdateItemSchema)
+    # the item id that is passed through the url must go last
+    def put(self, item_data, item_id):
+        print(item_data)
+        # no longer need to get request data since we are using the decorator
+        # item_data = request.get_json()
+        # if "price" not in item_data or "name" not in item_data:
+        #     abort(400, message="Bad request. Ensure 'price' and 'name' are included in the JSON payload.")
 
         try:
             item = items[item_id]
