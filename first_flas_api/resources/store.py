@@ -3,6 +3,8 @@ from flask import request
 from flask.views import MethodView
 from flask_smorest import Blueprint, abort
 from db import stores
+from schemas import StoreSchema
+
 
 
 # create blueprint
@@ -29,16 +31,15 @@ class Store(MethodView):
         except KeyError:
             abort(404, "Store not found")
 
-# @blp.route("/store")
 
-@blp.route("/item")
-class ItemList(MethodView):
+@blp.route("/store")
+class StoreList(MethodView):
     def get(self):
-        return {"items": list(items.values())}
+        return {"stores": list(stores.values())}
 
     # we can use the schema to validate the data, first we add it as a decorator, then we recieve it through the function
-    @blp.arguments(ItemSchema)
-    def post(self, item_data):
+    @blp.arguments(StoreSchema)
+    def post(self, store_data):
         # we no longer need to request the data since it is going to be recieved through the decorator.
         # item_data = request.get_json()
         # we no longer need to do this validation since we will use the schemas
