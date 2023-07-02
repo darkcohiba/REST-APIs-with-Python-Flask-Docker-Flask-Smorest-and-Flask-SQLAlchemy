@@ -62,7 +62,7 @@ class StoreList(MethodView):
             ):
                 abort(400, message=f"Item already exists.")
 
-        store_id = uuid.uuid4().hex
+        store_id = uuid.uuid4().int
         store = {**store_data, "id": store_id}
         stores[store_id] = store
 
