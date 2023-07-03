@@ -14,7 +14,7 @@ blp = Blueprint("stores", __name__, description="Operation on stores")
 # establish the route with the blueprint
 @blp.route("/store/<int:store_id>")
 class Store(MethodView):
-    @blp.response(200, StoreNameOnlySchema)
+    @blp.response(200, StoreSchema)
     def get(self, store_id):
         # print(type(store_id))
         try:
@@ -36,8 +36,10 @@ class Store(MethodView):
 
 @blp.route("/store")
 class StoreList(MethodView):
+    @blp.response(200, StoreSchema(many=True))
     def get(self):
-        return {"stores": list(stores.values())}
+        # return {"stores": list(stores.values())}
+        return stores.values()
     
 
     # we can use the schema to validate the data, first we add it as a decorator, then we recieve it through the function
