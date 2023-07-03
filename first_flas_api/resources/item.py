@@ -13,6 +13,8 @@ blp = Blueprint("items", __name__, description="Operation on items")
 # establish the route with the blueprint
 @blp.route("/item/<int:item_id>")
 class Item(MethodView):
+    # adding a blueprint response, it will return a status code of 200 with a response of the item schema, this is our serialization
+    @blp.response(200, ItemSchema)
     def get(self, item_id):
         try:
             return items[item_id], 200
