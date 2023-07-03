@@ -32,8 +32,9 @@ class Item(MethodView):
             abort(404, "Item not found")
 
     @blp.arguments(UpdateItemSchema)
-    # the item id that is passed through the url must go last
+    # the blp response must be nested inside the arguments decorator
     @blp.response(200, ItemSchema)
+    # the item id that is passed through the url must go last
     def put(self, item_data, item_id):
         print(item_data)
         # no longer need to get request data since we are using the decorator
@@ -51,8 +52,12 @@ class Item(MethodView):
 
 @blp.route("/item")
 class ItemList(MethodView):
+    @blp.response(200, ItemSchema(many=True))
     def get(self):
-        return {"items": list(items.values())}
+        # before adding the response decorator 
+        # return {"items": list(items.values())}
+        # after adding the response decorator
+        return items.values()
 
     # we can use the schema to validate the data, first we add it as a decorator, then we recieve it through the function
     @blp.arguments(ItemSchema)
