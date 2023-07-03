@@ -3,7 +3,7 @@ from flask import request
 from flask.views import MethodView
 from flask_smorest import Blueprint, abort
 from db import stores
-from schemas import StoreSchema
+from schemas import StoreSchema, StoreNameOnlySchema
 
 
 
@@ -14,6 +14,7 @@ blp = Blueprint("stores", __name__, description="Operation on stores")
 # establish the route with the blueprint
 @blp.route("/store/<int:store_id>")
 class Store(MethodView):
+    @blp.response(200, StoreNameOnlySchema)
     def get(self, store_id):
         # print(type(store_id))
         try:

@@ -16,3 +16,6 @@ class UpdateItemSchema(Schema):
 class StoreSchema(Schema):
     id = fields.Integer(dump_only=True)
     name = fields.String(required=True)
+
+class StoreNameOnlySchema(Schema):
+    name = fields.String(required=True)
