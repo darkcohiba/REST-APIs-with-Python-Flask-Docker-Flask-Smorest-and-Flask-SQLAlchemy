@@ -25,6 +25,7 @@ class Store(MethodView):
             # with smorest
             abort(404, message="store not found.")
 
+
     def delete(self, store_id):
         try:
             del stores[store_id]
@@ -37,6 +38,7 @@ class Store(MethodView):
 class StoreList(MethodView):
     def get(self):
         return {"stores": list(stores.values())}
+    
 
     # we can use the schema to validate the data, first we add it as a decorator, then we recieve it through the function
     @blp.arguments(StoreSchema)
@@ -68,3 +70,4 @@ class StoreList(MethodView):
         stores[store_id] = store
 
         return store
+    
