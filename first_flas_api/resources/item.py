@@ -82,7 +82,7 @@ class ItemList(MethodView):
                 item_data["name"] == item["name"]
                 and item_data["store_id"] == item["store_id"]
             ):
-                abort(400, message=f"Item already exists.")
+                abort(400, message="Item already exists.")
 
         item_id = uuid.uuid4().hex
         item = {**item_data, "id": item_id}

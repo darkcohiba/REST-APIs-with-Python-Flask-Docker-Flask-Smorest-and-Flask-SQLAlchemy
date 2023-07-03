@@ -66,7 +66,7 @@ class StoreList(MethodView):
                 store_data["name"] == store["name"]
                 and store_data["store_id"] == store["store_id"]
             ):
-                abort(400, message=f"Item already exists.")
+                abort(400, message="Item already exists.")
 
         store_id = uuid.uuid4().int
         store = {**store_data, "id": store_id}
