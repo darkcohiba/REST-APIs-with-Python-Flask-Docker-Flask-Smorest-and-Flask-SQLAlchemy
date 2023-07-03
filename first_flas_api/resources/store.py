@@ -36,7 +36,7 @@ class Store(MethodView):
 
 @blp.route("/store")
 class StoreList(MethodView):
-    @blp.response(200, StoreNameOnlySchema(many=True))
+    @blp.response(200, StoreSchema(many=True))
     def get(self):
         # return {"stores": list(stores.values())}
         return stores.values()
