@@ -33,6 +33,7 @@ class Item(MethodView):
 
     @blp.arguments(UpdateItemSchema)
     # the item id that is passed through the url must go last
+    @blp.response(200, ItemSchema)
     def put(self, item_data, item_id):
         print(item_data)
         # no longer need to get request data since we are using the decorator
