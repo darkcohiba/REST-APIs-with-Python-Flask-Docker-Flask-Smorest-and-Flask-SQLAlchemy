@@ -44,6 +44,7 @@ class StoreList(MethodView):
 
     # we can use the schema to validate the data, first we add it as a decorator, then we recieve it through the function
     @blp.arguments(StoreSchema)
+    @blp.response(201, StoreSchema)
     def post(self, store_data):
         # we no longer need to request the data since it is going to be recieved through the decorator.
         # item_data = request.get_json()
