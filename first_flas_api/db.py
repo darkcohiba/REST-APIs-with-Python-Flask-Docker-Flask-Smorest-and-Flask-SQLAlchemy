@@ -1,5 +1,7 @@
 # setting up sqlaclehmy database
+from flask_sqlalchemy import SQLAlchemy
 
+db = SQLAlchemy()
 # stores={
 #     1:{
 #         "name": "Marzyck",
