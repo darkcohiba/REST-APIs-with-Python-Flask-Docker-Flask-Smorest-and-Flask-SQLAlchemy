@@ -13,15 +13,21 @@ class PlainStoreSchema(Schema):
 
 
 
+class ItemSchema(PlainItemSchema):
+    store_id = fields.Integer(required=True, load_only=True)
+    store = fields.Nested(PlainStoreSchema, dump_only=True)
+
+
+class StoreSchema(PlainStoreSchema):
+    items = fields.List(fields.Nested(PlainItemSchema), dump_only=True)
+
+
 
 class UpdateItemSchema(Schema):
     name = fields.String()
     price = fields.Float()
 
 
-class StoreSchema(Schema):
-    id = fields.Integer(dump_only=True)
-    name = fields.String(required=True)
 
 class StoreNameOnlySchema(Schema):
     name = fields.String(required=True)
