@@ -11,6 +11,12 @@ from flask import Flask, request
 # import flask smorest from flask_smorest for blueprints
 from flask_smorest import Api
 
+# sqlalchemy version import db and models
+from db import db
+import models
+
+
+
 # using this for our ids for our db.py database
 # using blueprints we dont need this
 # import uuid
