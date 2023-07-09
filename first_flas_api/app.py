@@ -15,7 +15,7 @@ from flask_smorest import Api
 from db import db
 import models
 
-
+# through models we have access to all our models
 
 # using this for our ids for our db.py database
 # using blueprints we dont need this
