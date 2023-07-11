@@ -2,10 +2,15 @@ import uuid
 from flask import request
 from flask.views import MethodView
 from flask_smorest import Blueprint, abort
-from schemas import ItemSchema, UpdateItemSchema
+# sqlalchemy exception
+from sqlalchemy.exc import SQLAlchemyError
 # removing the below line after we added our models folder and sqlite
 # from db import items
 
+# sqlite db imports:
+from db import db
+from models import ItemModel
+from schemas import ItemSchema, UpdateItemSchema
 
 # create blueprint
 blp = Blueprint("items", __name__, description="Operation on items")
@@ -78,15 +83,23 @@ class ItemList(MethodView):
         #         400,
         #         message="Bad request. Ensure 'price', 'store_id', and 'name' are included in the JSON payload.",
         #     )
-        for item in items.values():
-            if (
-                item_data["name"] == item["name"]
-                and item_data["store_id"] == item["store_id"]
-            ):
-                abort(400, message="Item already exists.")
+        # removing the below for our update to sqlite
+        # for item in items.values():
+        #     if (
+        #         item_data["name"] == item["name"]
+        #         and item_data["store_id"] == item["store_id"]
+        #     ):
+        #         abort(400, message="Item already exists.")
 
-        item_id = uuid.uuid4().hex
-        item = {**item_data, "id": item_id}
-        items[item_id] = item
+        # item_id = uuid.uuid4().hex
+        # item = {**item_data, "id": item_id}
+        # items[item_id] = item
+        item = ItemModel(**item_data)
+        
+        try:
+            db.session.add(item)
+            db.session.commit()
+        except SQLalchemyError:
+            abort(500, message="An error occurred while inserting the item.")
 
         return item

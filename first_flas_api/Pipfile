@@ -9,6 +9,7 @@ flask = "*"
 flask-smorest = "*"
 marshmallow = "*"
 flask-sqlalchemy = "*"
+sqlalchemy = "*"
 
 [dev-packages]
 
