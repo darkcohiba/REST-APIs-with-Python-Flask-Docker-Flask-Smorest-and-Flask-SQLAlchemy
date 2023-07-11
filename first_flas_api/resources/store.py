@@ -2,7 +2,8 @@ import uuid
 from flask import request
 from flask.views import MethodView
 from flask_smorest import Blueprint, abort
-from db import stores
+# removing the below line after we added our models folder and sqlite
+# from db import stores
 from schemas import StoreSchema, StoreNameOnlySchema
 
 

@@ -28,7 +28,7 @@ from resources.item import blp as ItemBlueprint
 from resources.store import blp as StoreBlueprint
 
 # run out app with a function rather then by running this file directly
-def create_app():
+def create_app(db_url=None):
     app = Flask(__name__)
 
     # blueprint set up:
@@ -41,11 +41,20 @@ def create_app():
     app.config["OPENAPI_SWAGGER_UI_PATH"] = "/swagger-ui"
     app.config["OPENAPI_SWAGGER_UI_URL"] = "https://cdn.jsdelivr.net/npm/swagger-ui-dist/"
     # import our sqlite through os to protect our system database and give it a default
-    app.config["SQLALCHEMY_DATABASE_URI"] = os.getenv("DATABASE_URL", "sqlite:///data.db")
+    app.config["SQLALCHEMY_DATABASE_URI"] = db_url or os.getenv("DATABASE_URL", "sqlite:///data.db")
+    app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
+    db.init_app(app)
 
 
     # create our api endpoints
     api = Api(app)
+
+    # before first request function, this will run before each request
+    @app.before_first_request
+    def create_tables():
+        db.create_all()
+
+
     api.register_blueprint(ItemBlueprint)
     api.register_blueprint(StoreBlueprint)
 

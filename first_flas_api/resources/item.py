@@ -3,7 +3,8 @@ from flask import request
 from flask.views import MethodView
 from flask_smorest import Blueprint, abort
 from schemas import ItemSchema, UpdateItemSchema
-from db import items
+# removing the below line after we added our models folder and sqlite
+# from db import items
 
 
 # create blueprint
