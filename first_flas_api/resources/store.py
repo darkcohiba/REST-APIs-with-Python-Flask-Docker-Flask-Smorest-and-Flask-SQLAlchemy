@@ -21,22 +21,25 @@ blp = Blueprint("stores", __name__, description="Operation on stores")
 class Store(MethodView):
     @blp.response(200, StoreSchema)
     def get(self, store_id):
-        # print(type(store_id))
-        try:
-            return stores[store_id], 200
-        except KeyError:
-            # without smorest
-            # return {"message":"store not found"}, 404
-            # with smorest
-            abort(404, message="store not found.")
+        return StoreModel.query.get_or_404(store_id)
+        # removing when we update for sqlalchemy
+        # try:
+        #     return stores[store_id], 200
+        # except KeyError:
+        #     # without smorest
+        #     # return {"message":"store not found"}, 404
+        #     # with smorest
+        #     abort(404, message="store not found.")
 
 
     def delete(self, store_id):
-        try:
-            del stores[store_id]
-            return {"message": "Store deleted."}
-        except KeyError:
-            abort(404, "Store not found")
+        
+        # removing the below when we update to sqlalchemy
+        # try:
+        #     del stores[store_id]
+        #     return {"message": "Store deleted."}
+        # except KeyError:
+        #     abort(404, "Store not found")
 
 
 @blp.route("/store")
