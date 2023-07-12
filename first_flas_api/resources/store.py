@@ -33,7 +33,9 @@ class Store(MethodView):
 
 
     def delete(self, store_id):
-        
+        store = StoreModel.query.get_or_404(store_id)
+        raise NotImplementedError("Deleting a store is not implemented yet")
+
         # removing the below when we update to sqlalchemy
         # try:
         #     del stores[store_id]
