@@ -33,30 +33,34 @@ class Item(MethodView):
         #     abort(404, message="Item not found.")
 
     def delete(self, item_id):
-        try:
-            del items[item_id]
-            return {"message": "Item deleted."}
-        except KeyError:
-            abort(404, "Item not found")
+        item = ItemModel.query.get_or_404(item_id)
+        raise NotImplementedError("Deleting an item is not implemented yet")
+        # removing the below code when we update for sqlalchemy
+        # try:
+        #     del items[item_id]
+        #     return {"message": "Item deleted."}
+        # except KeyError:
+        #     abort(404, "Item not found")
 
     @blp.arguments(UpdateItemSchema)
     # the blp response must be nested inside the arguments decorator
     @blp.response(200, ItemSchema)
     # the item id that is passed through the url must go last
     def put(self, item_data, item_id):
-        print(item_data)
+        item = ItemModel.query.get_or_404(item_id)
+        raise NotImplementedError("Put an item is not implemented yet")
         # no longer need to get request data since we are using the decorator
         # item_data = request.get_json()
         # if "price" not in item_data or "name" not in item_data:
         #     abort(400, message="Bad request. Ensure 'price' and 'name' are included in the JSON payload.")
+        # removing the below when we update for sqlalchemy
+        # try:
+        #     item = items[item_id]
+        #     item |= item_data
 
-        try:
-            item = items[item_id]
-            item |= item_data
-
-            return item
-        except KeyError:
-            abort(404, message="item not found.")
+        #     return item
+        # except KeyError:
+        #     abort(404, message="item not found.")
 
 @blp.route("/item")
 class ItemList(MethodView):
