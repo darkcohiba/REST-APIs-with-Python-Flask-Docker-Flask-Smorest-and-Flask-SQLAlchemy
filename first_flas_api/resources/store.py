@@ -2,11 +2,15 @@ import uuid
 from flask import request
 from flask.views import MethodView
 from flask_smorest import Blueprint, abort
+# sqlalchemy exception
+from sqlalchemy.exc import SQLAlchemyError, IntegrityError
 # removing the below line after we added our models folder and sqlite
 # from db import stores
+
+# imports for sqlalchemy
+from db import db
+from models import StoreModel
 from schemas import StoreSchema, StoreNameOnlySchema
-
-
 
 # create blueprint
 blp = Blueprint("stores", __name__, description="Operation on stores")
