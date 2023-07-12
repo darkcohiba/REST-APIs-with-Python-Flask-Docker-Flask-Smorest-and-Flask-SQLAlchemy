@@ -62,16 +62,29 @@ class StoreList(MethodView):
         #         400,
         #         message="Bad request. Ensure 'price', 'store_id', and 'name' are included in the JSON payload.",
         #     )
-        for store in stores.values():
-            if (
-                store_data["name"] == store["name"]
-                and store_data["store_id"] == store["store_id"]
-            ):
-                abort(400, message="Item already exists.")
+        # removing the below when we adjust for sqlalchemy
+        # for store in stores.values():
+        #     if (
+        #         store_data["name"] == store["name"]
+        #         and store_data["store_id"] == store["store_id"]
+        #     ):
+        #         abort(400, message="Item already exists.")
 
-        store_id = uuid.uuid4().int
-        store = {**store_data, "id": store_id}
-        stores[store_id] = store
+        # store_id = uuid.uuid4().int
+        # store = {**store_data, "id": store_id}
+        # stores[store_id] = store
+
+        store = StoreModel(**store_data)
+
+        try:
+            db.sesson.add(store)
+            db.session.commit()
+        except IntegrityError:
+            abort(400, message="A store with that name already exists")
+        except SQLAlchemyError:
+            abort(500, message="An error occurred while creating the store.")
+
+        
 
         return store
     
