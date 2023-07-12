@@ -22,13 +22,15 @@ class Item(MethodView):
     # adding a blueprint response, it will return a status code of 200 with a response of the item schema, this is our serialization
     @blp.response(200, ItemSchema)
     def get(self, item_id):
-        try:
-            return items[item_id], 200
-        except KeyError:
-            # without smorest
-            # return {"message":"item not found"}, 404
-            # with smorest
-            abort(404, message="Item not found.")
+        return ItemModel.query.get_or_404(item_id)
+        # removing when we update for sqlalchemy
+        # try:
+        #     return items[item_id], 200
+        # except KeyError:
+        #     # without smorest
+        #     # return {"message":"item not found"}, 404
+        #     # with smorest
+        #     abort(404, message="Item not found.")
 
     def delete(self, item_id):
         try:
