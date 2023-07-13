@@ -7,10 +7,12 @@ from sqlalchemy.exc import SQLAlchemyError
 # removing the below line after we added our models folder and sqlite
 # from db import items
 
+
 # sqlite db imports:
 from db import db
 from models import ItemModel
 from schemas import ItemSchema, UpdateItemSchema
+
 
 # create blueprint
 blp = Blueprint("items", __name__, description="Operation on items")
