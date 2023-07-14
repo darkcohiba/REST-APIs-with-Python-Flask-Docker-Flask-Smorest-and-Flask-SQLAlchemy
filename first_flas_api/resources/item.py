@@ -57,7 +57,7 @@ class Item(MethodView):
             item = ItemModel(**item_data)
         db.session.add(item)
         db.session.commit()
-        raise NotImplementedError("Put an item is not implemented yet")
+        # raise NotImplementedError("Put an item is not implemented yet")
         # no longer need to get request data since we are using the decorator
         # item_data = request.get_json()
         # if "price" not in item_data or "name" not in item_data:
