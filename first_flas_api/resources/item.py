@@ -53,6 +53,10 @@ class Item(MethodView):
         if item:
             item.price = item_data["price"]
             item.name = item_data["name"]
+        else:
+            item = ItemModel(**item_data)
+        db.session.add(item)
+        db.session.commit()
         raise NotImplementedError("Put an item is not implemented yet")
         # no longer need to get request data since we are using the decorator
         # item_data = request.get_json()
