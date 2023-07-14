@@ -50,6 +50,8 @@ class Item(MethodView):
     # the item id that is passed through the url must go last
     def put(self, item_data, item_id):
         item = ItemModel.query.get_or_404(item_id)
+        if item:
+            item.price = item_data["price"]
         raise NotImplementedError("Put an item is not implemented yet")
         # no longer need to get request data since we are using the decorator
         # item_data = request.get_json()
