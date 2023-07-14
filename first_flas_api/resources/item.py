@@ -52,6 +52,7 @@ class Item(MethodView):
         item = ItemModel.query.get_or_404(item_id)
         if item:
             item.price = item_data["price"]
+            item.name = item_data["name"]
         raise NotImplementedError("Put an item is not implemented yet")
         # no longer need to get request data since we are using the decorator
         # item_data = request.get_json()
